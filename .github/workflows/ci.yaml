@@ -40,7 +40,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install golang migrate
-        run: go get -v github.com/golang-migrate/migrate/v4/cmd/migrate && go install github.com/golang-migrate/migrate/v4/cmd/migrate
+        run: |
+          go get -v github.com/golang-migrate/migrate/v4/cmd/migrate
+          go get -tags 'postgres' -v github.com/golang-migrate/migrate/v4/cmd/migrate
+          go install github.com/golang-migrate/migrate/v4/cmd/migrate
 
       - name: Run migrations
         run: make migrateup
