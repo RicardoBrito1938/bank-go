@@ -43,7 +43,9 @@ jobs:
 
       - name: Install golang migrate
         run: |
-          curl -L https://github.com/golang-migrate/migrate/releases/download/$version/migrate.$platform-amd64.tar.gz | tar xvz
+          version="v4.14.1" # replace with the version you want
+          platform="linux" # replace with your platform, likely "linux" for Ubuntu in GitHub Actions
+          curl -L "https://github.com/golang-migrate/migrate/releases/download/$version/migrate.$platform-amd64.tar.gz" | tar xvz
           sudo mv migrate.$platform-amd64 /usr/local/bin/migrate
           which migrate
 
