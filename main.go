@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bank.sqlc.dev/app/db/util"
 	"database/sql"
 	"log"
 
@@ -9,13 +10,16 @@ import (
 	_ "github.com/lib/pq"
 )
 
-const (
-	dbDriver      = "postgres"
-	dbSource      = "postgresql://root:password@localhost:5432/simple_bank?sslmode=disable"
-	serverAddress = ":8080"
-)
-
 func main() {
+	config, err := util.LoadConfig(".")
+	if err != nil {
+		log.Fatal("cannot load config:", err)
+	}
+
+	dbSource := config.DBSource
+	dbDriver := config.DBDriver
+	serverAddress := config.ServerAddress
+
 	conn, err := sql.Open(dbDriver, dbSource)
 	if err != nil {
 		log.Fatal("cannot connect to db: ", err)
