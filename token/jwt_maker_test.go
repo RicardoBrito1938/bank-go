@@ -10,7 +10,7 @@ import (
 )
 
 func TestJWTMaker(t *testing.T) {
-	maker, err := NewJWTMaker(util.RandomString(6))
+	maker, err := NewJWTMaker(util.RandomString(32))
 	require.NoError(t, err)
 
 	username := util.RandomOwner()
